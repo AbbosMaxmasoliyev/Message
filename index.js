@@ -43,8 +43,9 @@ mongoose.connect(`mongodb+srv://aliabbos:${process.env.KEY}@cluster3.nslyzfw.mon
   .catch((err) => console.log(err));
 
 
-app.get("/", (req,res)=>{
-    res.sendFile(path.join(__dirname, "/index.html"))
+app.get("/", async(req,res)=>{
+  const posts = await Message.find()
+  res.json({msg:posts})
 })
 app.post("/message", (req,res)=>{
         
